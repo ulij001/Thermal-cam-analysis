@@ -1,1 +1,247 @@
 
+#input = "C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\VFT51\\Polypen\\PTrial1_12_07_23_am.csv"
+
+df = pd.read_csv("C:\\Users\\HP EliteBook\\Documents\\Spectrum_absorbance.csv")
+df
+
+#df = pd.DataFrame(df)
+#polyp.to_csv("C:\\Users\\HP EliteBook\\Documesnts\\Thermal Imagin\\VFT51\\Spectrapen\\newSTrial1_12_07_23_pm.csv")
+#df = df.drop([df.index[2], df.index[3], df.index[1]])
+#df[['wavelength']
+
+
+
+#polyp = pd.DataFrame(polyp, rows=None)
+#polyp.set_index(0, inplace=True)
+
+#df = df.split('\t')
+
+#polyp
+
+
+df = pd.read_csv("C:\\Users\\HP EliteBook\\Documents\\PC_Trial_1_10s.csv")
+df
+
+melted_df = pd.melt(df, id_vars=["Wavelength"], var_name="Time", value_name="Values")
+melted_df.to_csv("C:\\Users\\HP EliteBook\\Documents\\Spectrum_absorbance_R.csv")
+#df = pd.DataFrame(df)
+#polyp.to_csv("C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\VFT51\\Spectrapen\\newSTrial1_12_07_23_pm.csv")
+#df = df.drop([df.index[2], df.index[3], df.index[1]])
+#df['Absorbance'] = df['Absorbance'].str.split('\t')
+
+#df.set_index(0, inplace=True)
+
+
+
+
+# Melt the DataFrame using the 'time' column as the ID variable and 'value_vars' from the first row as the value variables
+Trial = pd.melt(polyp, id_vars=['time'], value_vars=value_vars, var_name='timestamp', value_name='value')
+melted_df
+
+
+
+
+
+#print(melted_df)
+
+melted_df=pd.DataFrame(melted_df)
+melted_df
+
+melted_df[['Day', 'Month', 'Year', 'Hour', 'Minute', 'Second']] = melted_df['timestamp'].str.split(r'[/ :.]', expand=True)
+melted_df
+#melted_df[['Date', 'Time']] = melted_df['timestamp'].str.split("3 ", expand=True)
+#melted_df
+
+#melted_df[['Hour', 'Minute', 'Hour']] = melted_df['Time'].str.split(".", expand=True)
+#melted_df
+
+
+#melted_df.to_csv("C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\VFT51\\Spectrapen\\adjustments.csv")
+
+
+
+#average_by_category = melted_df.groupby(['Hour'])['value'].mean()
+#average_by_category.to_csv("C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\VFT51\\Spectrapen\\adjustments.csv")
+
+
+
+import numpy as np
+import pandas as pd
+
+# Assuming you have a DataFrame called 'melted_df' with a 'time' column
+
+# Define a function to classify the 'red' category based on the time range
+    
+
+
+def classify_colour(time):
+    if 620 <= time < 630:
+        return 'red'
+    elif 630 <= time < 640:
+        return 'red'
+    elif 640 <= time < 650:
+        return 'red'
+    elif 650 <= time < 660:
+        return 'red'
+    elif 660 <= time < 670:
+        return 'red'
+    elif 670 <= time < 680:
+        return 'red'
+    elif 680 <= time < 690:
+        return 'red'
+    elif 690 <= time < 700:
+        return 'red'
+    elif 700 <= time < 710:
+        return 'red'
+    elif 710 <= time < 720:
+        return 'red'
+    elif 720 <= time < 730:
+        return 'red'
+    elif 730 <= time < 740:
+        return 'red'
+    elif 740 <= time < 750:    
+        return 'red'
+    elif 750 <= time < 760:
+        return 'red'
+    elif 760 <= time < 770:
+        return 'red'
+    elif 770 <= time < 780:
+        return 'red'
+    elif 490 <= time < 500: 
+        return 'green'
+    elif 500 <= time < 510: 
+        return 'green'
+    elif 510 <= time < 520:
+        return 'green'
+    elif 520 <= time < 530:
+        return 'green'
+    elif 530 <= time < 540:
+        return 'green'
+    elif 540 <= time < 550: 
+        return 'green'
+    elif 550 <= time < 560: 
+        return 'green'
+    elif 560 <= time < 570:
+        return 'green'
+    elif 440 <= time < 450:
+        return 'blue'
+    elif 450 <= time < 460:
+        return 'blue'
+    elif 460 <= time < 470:
+        return 'blue'
+    elif 470 <= time < 480:
+        return 'blue'
+    elif 480 <= time < 490:
+        return 'blue'
+    else:
+        return 'other'
+    
+
+    
+
+# Apply the classification function to create the 'colour_scheme' column
+
+
+
+
+melted_df['colour_scheme'] = melted_df['time'].apply(classify_colour)
+
+
+def classify_time(Hour):
+    if 12 <= Hour < 23: 
+        return 'pm'
+    else:
+        return 'am'
+    
+melted_df['time_of_day'] = melted_df['Hour'].apply(classify_time)
+
+
+
+
+
+# Add a column with labels based on conditions
+#melted_df['colour_scheme'] = np.where(melted_df['time'] >620 , 'red', np.where(melted_df['time'] >440, 'green',np.where(melted_df['time'] <440, 'blue', 'other')))
+#melted_df
+#avg_with_colour=melted_df.groupby(['colour_scheme', 'Hour'])['value'].mean()
+#avg_with_colour.to_csv("C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\VFT51\\Spectrapen\\relevant.csv")
+# Display the modified DataFrame
+#print(df)
+
+melted_df.to_csv("C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\VFT51\\Spectrapen\\abs_col.csv")
+
+
+
+melted_df
+
+if 620 <= time < 630:        
+    return mean(time)
+elif 630 <= time < 640:
+    return mean(time)
+elif 640 <= time < 650:
+    return mean(time)
+elif 650 <= time < 660:
+    return mean(time)
+elif 660 <= time < 670:
+    return mean(time)  
+elif 430 >= time < 440: 
+    return mean(time)
+elif 420 >= time < 430: 
+    return mean(time)
+elif 410 >= time < 420:
+    return mean(time)
+elif 400 >= time < 410:
+    return mean(time)
+elif 390 >= time < 400:
+    return mean(time)
+elif 300 >= time < 310: 
+    return mean(time)
+elif 310 >= time < 320:
+    return mean(time)
+else:
+    return"other"
+
+
+
+
+
+
+# Calculate the average of 'Value' based on 'Category'
+average_by_category = melted_df.groupby(['time','timestamp'])['value'].mean()
+
+print(average_by_category)
+
+average_by_category.to_csv("C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\VFT51\\Spectrapen\\Average_by_category.csv")
+
+
+
+import pandas as pd
+
+# Read the CSV file into a pandas DataFrame
+data = pd.read_csv('your_data.csv')
+
+# Replace 'your_data.csv' with the actual path to your CSV file
+
+# Let's assume your data looks like this:
+#    ColumnA  ColumnB
+# 0        1        5
+# 1        1        6
+# 2        2        7
+# 3        2        8
+# 4        3        9
+# 5        3       10
+
+# Group the data by the 'ColumnA' values and calculate the mean of 'ColumnB' for each group
+grouped_data = data.groupby('ColumnA')['ColumnB'].mean()
+
+# The 'grouped_data' will be a new DataFrame where the 'ColumnA' values are grouped, and the 'ColumnB' values are averaged:
+# ColumnA
+# 1          5.5
+# 2          7.5
+# 3          9.5
+# Name: ColumnB, dtype: float64
+
+polyp
+
+
+polyp = polyp.drop([polyp.index[2], polyp.index[1]])
+polyp.to_csv("C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\VFT51\\Spectrapen\\newsSTrial1_12_07_23_pm.csv")
