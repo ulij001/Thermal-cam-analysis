@@ -1,1 +1,100 @@
+or i in range(len(temperature_list)):
+    for c in range(len(plant_image_list)):
+         ## Locate reference image timestamp from list and match with timestamp from refernce image list
+        #if temperature_data_list[i]['timestamp'] == plant_image_list[c]['timestamp']:
+        if plant_image_list[i]['timestamp'] == temperature_list[j]['timestamp']:
 
+            
+            plant_array_copy = plant_image_list[c]['array']
+            for x in range(ARRAY_COL):
+                for y in range(ARRAY_ROWS):
+                    
+                    if plant_image_list[c]['array'][x][y] != 0:
+                        plant_array_copy[x][y] = temperature_list[i]['array'][x][y]
+                        #plant_array_copy = ap()
+                        #timestamp = plant_image_list[i]['timestamp'] # Define Timestamp here
+            
+            Final_Plant_Data.append({''+str(c): plant_array_copy})
+            #Final_Plant_Data.to_excel(f"C:\\Users\\HP EliteBook\Documents\\Thermal Imagin\\Thesis\\Data\\Final_f\\final_ref{timestamp_str}.xlsx")
+
+
+for i in range(len(temperature_list)):
+    for j in range(len(plant_image_list)):
+        ## Locate reference image timestamp from list and match with timestamp from refernce image list
+        if reference_image_list[j]['timestamp'] == temperature_list[i]['timestamp']:
+            array_copy = reference_image_list[j]['array']
+            timestamp = reference_image_list[j]['timestamp']
+            
+            for x in range(ARRAY_COL):
+                for y in range(ARRAY_ROWS):
+                    if reference_image_list[j]['array'][x][y] != 0:
+                        array_copy[x][y] = temperature_list[i]['array'][x][y]
+                    
+           # Final_Data_Reference.append({'array_'+str(j): array_copy, 'timestamp': timestamp})
+            
+            # Save array_copy to Excel file with unique filename
+            timestamp_str = str(timestamp).replace(' ', '_').replace(':', '-')
+            filename = f"C:\\Users\\HP EliteBook\Documents\\Thermal Imagin\\Thesis\\Data\\Final_f\\final_r{timestamp_str}.xlsx"
+            array_copy.to_excel(filename)
+            
+            
+            
+for i in range(len(temperature_list)):
+    for j in range(len(reference_image_list)):
+        ## Locate reference image timestamp from list and match with timestamp from refernce image list
+        if plant_image_list[j]['timestamp'] == temperature_list[i]['timestamp']:
+            array_copy = plant_image_list[j]['array']
+            timestamp = plant_image_list[j]['timestamp']
+
+            for x in range(ARRAY_COL):
+                for y in range(ARRAY_ROWS):
+                    if plant_image_list[j]['array'][x][y] != 0:
+                        array_copy[x][y] = temperature_list[i]['array'][x][y]
+
+            # Final_Data_Plant.append({'array_'+str(j): array_copy, 'timestamp': timestamp})
+            
+            # Save array_copy to Excel file with unique filename
+            timestamp_str = str(timestamp).replace(' ', '_').replace(':', '-')
+            filename = f"C:\\Users\\HP EliteBook\Documents\\Thermal Imagin\\Thesis\\Data\\Final_p\\final_p{timestamp_str}.xlsx"
+            array_copy.to_excel(filename)
+            
+
+
+
+import os
+import pandas as pd
+import datetime
+
+# Define folder path
+folder_path = "C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\Thesis\\Data\\Final_p"
+
+# Loop through files in folder
+for filename in os.listdir(folder_path):
+    # Check if file is an Excel file
+    if filename.startswith("final_p") and filename.endswith(".xlsx"):
+        # Load Excel file into pandas DataFrame
+        df = pd.read_excel(os.path.join(folder_path, filename))
+        
+        
+        
+        timestamp_str = filename.replace('final_p', '').replace('.xlsx', '-')
+        #df["timestamp"] = timestamp_str
+
+# Calculate row means for non-zero values
+        df['row_mean'] = df.apply(lambda row: row[row != 0].mean(), axis=1)
+        # Add timestamp value as a new column
+        df['timestamp'] = timestamp_str
+        
+        df['material'] = pd.Series('plants')
+        
+        df = df[['timestamp', 'material', 'row_mean']]
+        #timestamp_str = filename.split("_")[1].replace("-", ":")
+        #df["timestamp"] = timestamp_str
+        df.to_excel(f"C:\\Users\\HP EliteBook\\Documents\\Thermal Imagin\\Thesis\\Data\\final_preconcat_p\\pre_concat_p{timestamp_str}.xlsx")
+        
+        # Calculate row means for non-zero values
+        #df["row_mean"] = df.apply(lambda row: row[row != 0].mean(), axis=1)
+        
+        # Save modified DataFrame back to Excel file
+        #with pd.ExcelWriter(os.path.join(folder_path, filename)) as writer:
+        #    df.to_excel(writer, index=False)
