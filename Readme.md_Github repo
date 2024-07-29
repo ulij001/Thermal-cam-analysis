@@ -1,1 +1,10 @@
+##########################################
+########## Thermal-cam-analysis ##########
+##########################################
 
+The following github repo contains the relevant information about the following folders: 
+
+  - Spectrum data wrangling: python scripts to wrangle spectrapen data to a suitable format and then calculate NDVI values
+  - Thermal cam: Image array overlaping: Python scripts enabling the overlaping of temperature arrays onto images 
+  - Thermal cam: trial analysis.R: scripts involved in data analysis of the manually collected data from the plant science trial
+  - Thermal_cam_data_wrangling.R: Scripts involved in the plotting of relevant plant temperature obtained from the camera. 
